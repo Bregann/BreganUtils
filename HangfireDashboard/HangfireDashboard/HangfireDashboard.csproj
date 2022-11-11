@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Hangfire" Version="1.7.31" />
+    <PackageReference Include="Hangfire.Dashboard.BasicAuthorization" Version="1.0.2" />
+    <PackageReference Include="Hangfire.Dashboard.Dark" Version="2.0.4" />
+    <PackageReference Include="Hangfire.PostgreSql" Version="1.9.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\BreganUtils\BreganUtils.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="CatBot">
+      <HintPath>..\..\..\CatBot\bin\Release\net6.0\publish\CatBot.dll</HintPath>
+    </Reference>
+    <Reference Include="FinanceManagerAPI">
+      <HintPath>..\..\..\FinanceManager\FinanceManagerAPI\FinanceManagerAPI\bin\Release\net6.0\publish\FinanceManagerAPI.dll</HintPath>
+    </Reference>
+    <Reference Include="ProjectMonitor.Api">
+      <HintPath>..\..\..\ProjectMonitor\ProjectMonitor\ProjectMonitor\bin\Release\net6.0\publish\ProjectMonitor.Api.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
