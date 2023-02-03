@@ -1,0 +1,61 @@
+name: Build and Package
+
+on: [push]
+
+env:
+  DOTNET_CLI_TELEMETRY_OPTOUT: 1
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@master
+
+    - name: Build Docker Image
+      run: |
+        docker build -t hangfiredashboard .
+        
+    - name: Save Docker Image
+      run: |
+        docker save hangfiredashboard > hangfiredashboard.tar
+
+    - name: Upload Docker Image
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USERNAME }}
+        key: ${{ secrets.KEY }}
+        source: hangfiredashboard.tar
+        target: /root/Docker/
+        
+    - name: Stop And Remove Current Container
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USERNAME }}
+        key: ${{ secrets.KEY }}
+        script: |
+          running=$(docker ps --filter name=hangfiredashboard --format '{{.Names}}')
+          if [[ $running == hangfiredashboard ]]; then
+            docker stop hangfiredashboard
+            docker rm hangfiredashboard
+          fi
+    - name: Load New Docker Image
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USERNAME }}
+        key: ${{ secrets.KEY }}
+        script: |
+          docker load -i /root/Docker/hangfiredashboard.tar
+
+    - name: Start New Container
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USERNAME }}
+        key: ${{ secrets.KEY }}
+        script: |
+          docker run -d --name hangfiredashboard hangfiredashboard:latest
