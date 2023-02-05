@@ -9,6 +9,8 @@ namespace BreganUtils.ProjectMonitor
 {
     public class ProjectMonitorCommon
     {
+        private static Timer _timer1;
+
         public static void ReportProjectUp(string projectName)
         {
             if (ProjectMonitorConfig.ApiKey == "" || ProjectMonitorConfig.Mode == "debug")
@@ -19,16 +21,10 @@ namespace BreganUtils.ProjectMonitor
             try
             {
                 //Ping the api every 5s reporting that the service is up
-                var timer = new Timer(10000);
-                timer.Elapsed += (sender, e) => SendProjectApiRequestUptime(sender, e, projectName);
-                timer.Enabled = true;
-                timer.Start();
-
-                //Ping the api every 10s reporting that the server is up
-                var timer2 = new Timer(20000);
-                timer2.Elapsed += (sender, e) => SendAddAndUpdateSystemData(sender, e);
-                timer2.Enabled = true;
-                timer2.Start();
+                _timer1 = new Timer(10000);
+                _timer1.Elapsed += (sender, e) => SendProjectApiRequestUptime(sender, e, projectName);
+                _timer1.Enabled = true;
+                _timer1.Start();
             }
             catch (Exception e)
             {
@@ -64,34 +60,6 @@ namespace BreganUtils.ProjectMonitor
             catch (Exception ex)
             {
                 Log.Error($"[Project Monitor] Error with SendProjectApiRequestUptime - {ex}");
-                return;
-            }
-        }
-
-        private static void SendAddAndUpdateSystemData(object sender, ElapsedEventArgs e)
-        {
-            try
-            {
-                //Get the data
-                var sysUptime = TimeSpan.FromMilliseconds(Environment.TickCount64);
-                var sysName = Environment.MachineName;
-
-                var client = new RestClient(ProjectMonitorConfig.ApiUrl);
-                var request = new RestRequest("/api/CommonUpdates/AddAndUpdateSystemData", Method.Post);
-
-                request.AddHeader("Authorization", ProjectMonitorConfig.ApiKey);
-
-                request.AddBody(new AddAndUpdateSystemDataDto
-                {
-                    SystemName = sysName,
-                    SystemUptime = sysUptime
-                });
-
-                client.Post(request);
-            }
-            catch (Exception ex)
-            {
-                Log.Error($"[Project Monitor] Error with SendAddAndUpdateSystemData - {ex}");
                 return;
             }
         }

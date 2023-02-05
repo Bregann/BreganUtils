@@ -6,19 +6,13 @@ namespace BreganUtils
 {
     public class MessageHelper
     {
-#if DEBUG
-        private static readonly string _apiKey = "";
-#else
-        private static readonly string _apiKey = "";
-#endif
-
-        public static bool SendEmail(string toEmailAddress, string toEmailAddressName, string fromEmailAddress, string fromEmailAddressName, object emailContent, string templateId)
+        public static bool SendEmail(string apiKey, string toEmailAddress, string toEmailAddressName, string fromEmailAddress, string fromEmailAddressName, object emailContent, string templateId)
         {
             try
             {
                 var client = new RestClient("https://messagingapi.bregan.me");
                 var request = new RestRequest("/api/Send/ScheduleEmail", Method.Post);
-                request.AddHeader("Authorization", _apiKey);
+                request.AddHeader("Authorization", apiKey);
 
                 request.AddBody(new ScheduleEmailDto
                 {
@@ -40,13 +34,13 @@ namespace BreganUtils
             }
         }
 
-        public static bool SendTextMessage(int chatId, string messageContent)
+        public static bool SendTextMessage(string apiKey, int chatId, string messageContent)
         {
             try
             {
                 var client = new RestClient("https://messagingapi.bregan.me");
                 var request = new RestRequest("/api/Send/ScheduleText", Method.Post);
-                request.AddHeader("Authorization", _apiKey);
+                request.AddHeader("Authorization", apiKey);
 
                 request.AddBody(new ScheduleTextDto
                 {

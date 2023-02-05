@@ -5,10 +5,6 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BreganUtils", "BreganUtils\BreganUtils.csproj", "{8942CFF4-29AB-4F65-97D4-3AD45798AC1A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HangfireDashboard", "HangfireDashboard\HangfireDashboard\HangfireDashboard.csproj", "{3C1D7A9B-743A-4824-9D6C-AF95A1E21BA5}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessagingMicroservice", "MessagingMicroservice\MessagingMicroservice.csproj", "{79A8EDC0-69E4-4D6C-916C-A4E45937136B}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,14 +15,6 @@ Global
 		{8942CFF4-29AB-4F65-97D4-3AD45798AC1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8942CFF4-29AB-4F65-97D4-3AD45798AC1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8942CFF4-29AB-4F65-97D4-3AD45798AC1A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3C1D7A9B-743A-4824-9D6C-AF95A1E21BA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3C1D7A9B-743A-4824-9D6C-AF95A1E21BA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3C1D7A9B-743A-4824-9D6C-AF95A1E21BA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3C1D7A9B-743A-4824-9D6C-AF95A1E21BA5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{79A8EDC0-69E4-4D6C-916C-A4E45937136B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{79A8EDC0-69E4-4D6C-916C-A4E45937136B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{79A8EDC0-69E4-4D6C-916C-A4E45937136B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{79A8EDC0-69E4-4D6C-916C-A4E45937136B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
