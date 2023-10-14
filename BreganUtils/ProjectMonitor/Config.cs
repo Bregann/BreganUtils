@@ -11,7 +11,7 @@ namespace BreganUtils.ProjectMonitor
 
         public static void SetupMonitor(string envMode, string apiKey = "")
         {
-            Log.Logger = new LoggerConfiguration().WriteTo.Async(x => x.File("Logs/log.log", retainedFileCountLimit: 7, rollingInterval: RollingInterval.Day)).WriteTo.Console().CreateLogger();
+            Log.Logger = new LoggerConfiguration().WriteTo.Async(x => x.File("Logs/log.log", retainedFileCountLimit: null, rollingInterval: RollingInterval.Day)).WriteTo.Console().CreateLogger();
 
             if (envMode != "debug" && envMode != "release")
             {
