@@ -9,21 +9,19 @@
             return TimeZoneInfo.ConvertTimeFromUtc(dt, destinazionTZ);
         }
 
-        public static string HumanizeDateTime(DateTime dt)
+        public static string HumanizeDateTime(DateTime dt) //I removed the .Replace("0", "") from dt.ToString("dd") as idk why it was there
         {
-            return dt.ToString("dddd") + " " + dt.ToString("dd").Replace("0", "") + GetDaySuffix(dt.Day) + " " + dt.ToString("MMMM") + " " + dt.ToString("yyyy");
+            return dt.ToString("dddd") + " " + (dt.Day > 9 ? dt.ToString("dd") : dt.ToString("dd").Replace("0", "")) + GetDaySuffix(dt.Day) + " " + dt.ToString("MMMM") + " " + dt.ToString("yyyy");
         }
 
-        public static string? HumanizeDateTimeWithTime(DateTimeOffset? dt)
+        public static string? HumanizeDateTimeWithTime(DateTimeOffset? dt) //I removed the .Replace("0", "") from dt.ToString("dd") as idk why it was there
         {
             if (dt == null)
             {
                 return null;
             }
-            return dt.Value.ToString("dddd") + " " + dt.Value.ToString("dd").Replace("0", "") + GetDaySuffix(dt.Value.Day) + " " + dt.Value.ToString("MMMM") + " " + dt.Value.ToString("yyyy") + " @ " + dt.Value.ToString("HH:mm:ss zzz");
+            return dt.Value.ToString("dddd") + " " + (dt.Value.Day > 9 ? dt.Value.ToString("dd") : dt.Value.ToString("dd").Replace("0", "")) + GetDaySuffix(dt.Value.Day) + " " + dt.Value.ToString("MMMM") + " " + dt.Value.ToString("yyyy") + " @ " + dt.Value.ToString("HH:mm:ss zzz");
         }
-
-
 
         private static string GetDaySuffix(int day)
         {
